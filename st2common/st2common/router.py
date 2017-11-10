@@ -38,6 +38,9 @@ from st2common.util import date as date_utils
 from st2common.util.jsonify import json_encode
 from st2common.util.http import parse_content_type_header
 
+'''
+Router of HTTP request
+'''
 
 LOG = logging.getLogger(__name__)
 
@@ -66,7 +69,7 @@ def extend_with_default(validator_class):
                 instance.setdefault(property, subschema["default"])
 
         for error in validate_properties(
-            validator, properties, instance, schema,
+                validator, properties, instance, schema,
         ):
             yield error
 
@@ -459,7 +462,7 @@ class Router(object):
 
         if response_spec and 'schema' in response_spec:
             LOG.debug('Using response spec "%s" for endpoint %s and status code %s' %
-                     (response_spec_name, endpoint['operationId'], resp.status_code))
+                      (response_spec_name, endpoint['operationId'], resp.status_code))
 
             try:
                 validator = CustomValidator(response_spec['schema'], resolver=self.spec_resolver)
